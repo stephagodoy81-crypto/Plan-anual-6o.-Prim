@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizarra Digital - Plan Anual Ciencias Sociales 6to Primaria</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: #333333;
+            padding: 10px;
+        }
+
+        #dashboard {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 2px solid #1F3C88;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra Superior Oficial */
+        .top-bar {
+            background-color: #1F3C88;
+            color: #FFFFFF;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-img {
+            max-height: 50px;
+            width: auto;
+        }
+
+        .header-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-info h1 {
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .header-info p {
+            font-size: 0.9rem;
+            color: #F2C94C;
+            font-style: italic;
+        }
+
+        .fullscreen-btn {
+            background-color: #F2C94C;
+            color: #1F3C88;
+            border: none;
+            padding: 10px 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: #e5bd3b;
+            transform: scale(1.02);
+        }
+
+        /* Navegación por Pestañas Horizontales */
+        .nav-tabs {
+            display: flex;
+            background-color: #3F72AF;
+            overflow-x: auto;
+            border-bottom: 3px solid #1F3C88;
+        }
+
+        .tab-btn {
+            background-color: #3F72AF;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background-color 0.2s, color 0.2s;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn:hover {
+            background-color: #1F3C88;
+        }
+
+        .tab-btn.active {
+            background-color: #F2C94C;
+            color: #1F3C88;
+            font-weight: bold;
+        }
+
+        /* Área de Contenido */
+        .content-area {
+            padding: 25px;
+            min-height: 480px;
+            background-color: #FFFFFF;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Tipografía y Estilos Internos */
+        .section-title {
+            color: #1F3C88;
+            border-bottom: 2px solid #3F72AF;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+
+        .subsection-title {
+            color: #3F72AF;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #3F72AF;
+            border-left: 5px solid #1F3C88;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .card-highlight {
+            border-left-color: #F2C94C;
+            background-color: #fffdf5;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .unit-box {
+            border: 1px solid #3F72AF;
+            border-radius: 6px;
+            padding: 15px;
+            background-color: #FFFFFF;
+        }
+
+        .unit-header {
+            background-color: #1F3C88;
+            color: #FFFFFF;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .fullscreen-btn {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="dashboard">
+    <!-- Barra Superior / Encabezado -->
+    <div class="top-bar">
+        <div class="header-left">
+            <img src="https://admisiones.colegiomontano.edu.gt/assets/img/logo-cm-blanco.webp" alt="Logo Colegio Montano" class="logo-img">
+            <div class="header-info">
+                <h1><i>Plan Anual Interactivo: Ciencias Sociales</i></h1>
+                <p><i>Grado: Sexto Primaria "A" y "B" | Docente: Stephany Godoy | Ciclo Escolar: 2027</i></p>
+            </div>
+        </div>
+        <button class="fullscreen-btn" onclick="toggleFullScreen()">
+            🖥️ <i>Pantalla Completa</i>
+        </button>
+    </div>
+
+    <!-- Navegación por Pestañas -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'tab1')"><i>I) Descriptor</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab2')"><i>II) Objetivos</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab3')"><i>III) Competencias</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab4')"><i>IV) Indicadores</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab5')"><i>V) Métodos</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab6')"><i>VI) Bibliografía</i></button>
+        <button class="tab-btn" onclick="openTab(event, 'tab7')"><i>VII) Contenidos</i></button>
+    </div>
+
+    <!-- Área de Contenido -->
+    <div class="content-area">
+
+        <!-- I) DESCRIPTOR DEL CURSO -->
+        <div id="tab1" class="tab-content active">
+            <h2 class="section-title"><i>I) Descriptor del Curso</i></h2>
+            <div class="card">
+                <p><i>El área de Ciencias Sociales para Sexto Grado de Primaria está orientada a favorecer en los estudiantes la comprensión de los procesos históricos, geográficos, sociales, culturales y ciudadanos que explican la organización de las sociedades, los cambios de la humanidad y los desafíos del mundo actual. A través del análisis de las civilizaciones antiguas, las transformaciones modernas y la globalización contemporánea, se promueve el desarrollo del pensamiento crítico, la participación responsable, el respeto a la diversidad cultural y la valoración del patrimonio natural e histórico.</i></p>
+            </div>
+            
+            <div class="card card-highlight">
+                <h3 class="subsection-title"><i>Propósito General</i></h3>
+                <p><i>Favorecer en los estudiantes la comprensión de los procesos históricos, geográficos, sociales, culturales y ciudadanos que explican la organización de las sociedades, los cambios de la humanidad y los desafíos del mundo actual, promoviendo pensamiento crítico, participación responsable, respeto a la diversidad y valoración del patrimonio.</i></p>
+            </div>
+        </div>
+
+        <!-- II) OBJETIVOS GENERALES -->
+        <div id="tab2" class="tab-content">
+            <h2 class="section-title"><i>II) Objetivos Generales</i></h2>
+            <div class="card">
+                <ol>
+                    <li><i>Comprender la organización de las sociedades, el funcionamiento del Estado, el gobierno democrático y la importancia de los derechos humanos y ciudadanos.</i></li>
+                    <li><i>Analizar la evolución de la humanidad desde las primeras civilizaciones hasta la era global, reconociendo aportes culturales, sociales y científicos.</i></li>
+                    <li><i>Desarrollar habilidades cartográficas y de análisis geográfico, ambiental y demográfico para interpretar las dinámicas de los continentes de Europa, Asia, África y Oceanía.</i></li>
+                    <li><i>Fomentar una actitud crítica y reflexiva frente a los problemas sociales, ambientales, de exclusión, discriminación y violencia en el mundo contemporáneo.</i></li>
+                    <li><i>Promover la participación ciudadana activa, la empatía, el desarrollo sostenible y la conservación del patrimonio cultural y natural de Guatemala y del mundo.</i></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- III) COMPETENCIAS -->
+        <div id="tab3" class="tab-content">
+            <h2 class="section-title"><i>III) Competencias</i></h2>
+            
+            <h3 class="subsection-title"><i>Competencias Académicas del Área (Por Misión / Bimestre)</i></h3>
+            <div class="card">
+                <ul>
+                    <li><i>Unidad I: Analiza la organización de las sociedades y explica procesos históricos y geográficos fundamentales, relacionándolos con la realidad guatemalteca y con la diversidad cultural del mundo.</i></li>
+                    <li><i>Unidad II: Comprende la evolución de las sociedades, los derechos humanos y las características de diferentes civilizaciones, valorando la dignidad humana, la inclusión y el cuidado del ambiente.</i></li>
+                    <li><i>Unidad III: Explica los principales cambios políticos, económicos, sociales, científicos y culturales ocurridos desde la Edad Moderna hasta la Edad Contemporánea, relacionándolos con procesos de transformación social.</i></li>
+                    <li><i>Unidad IV: Analiza conflictos y transformaciones del mundo contemporáneo, comprendiendo la globalización, los movimientos sociales, la diversidad cultural y los desafíos ambientales y sociales del siglo XXI.</i></li>
+                </ul>
+            </div>
+
+            <h3 class="subsection-title"><i>Competencias Institucionales CM (Contenido Fijo Institucional)</i></h3>
+            <div class="grid-container">
+                <div class="card card-highlight">
+                    <ul>
+                        <li><i>Pensamiento crítico y resolución de problemas.</i></li>
+                        <li><i>Colaboración y trabajo en equipo.</i></li>
+                        <li><i>Competencias digitales.</i></li>
+                        <li><i>Comunicación efectiva.</i></li>
+                        <li><i>Creatividad e innovación.</i></li>
+                        <li><i>Aprendizaje autónomo y adaptabilidad.</i></li>
+                    </ul>
+                </div>
+                <div class="card card-highlight">
+                    <ul>
+                        <li><i>Conciencia global y cultural.</i></li>
+                        <li><i>Ética y ciudadanía digital.</i></li>
+                        <li><i>Gestión emocional y resiliencia.</i></li>
+                        <li><i>Conciencia ecológica y sostenibilidad.</i></li>
+                        <li><i>Desempeño de roles de liderazgo.</i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- IV) INDICADORES DE LOGRO -->
+        <div id="tab4" class="tab-content">
+            <h2 class="section-title"><i>IV) Indicadores de Logro</i></h2>
+            <div class="card">
+                <ul>
+                    <li><i>Explica conceptos básicos de sociedad, Estado, gobierno, democracia y participación ciudadana.</i></li>
+                    <li><i>Ubica y caracteriza civilizaciones antiguas y reconoce sus principales aportes culturales.</i></li>
+                    <li><i>Interpreta mapas, coordenadas y características físicas y humanas de Europa, Asia, África y Oceanía.</i></li>
+                    <li><i>Valora la diversidad cultural y la investigación científica como medios para comprender la realidad.</i></li>
+                    <li><i>Reconoce derechos humanos y derechos de la niñez y explica su importancia en la vida cotidiana.</i></li>
+                    <li><i>Describe aportes de Grecia, Roma, la Edad Media y el islam al desarrollo de la humanidad.</i></li>
+                    <li><i>Analiza características geográficas, demográficas y ambientales, e identifica grupos vulnerables proponiendo acciones de inclusión y respeto.</i></li>
+                    <li><i>Explica características y consecuencias de la Edad Moderna, el Renacimiento, la Ilustración, la Industrialización y la Revolución Francesa.</i></li>
+                    <li><i>Propone acciones frente a la discriminación, el racismo, la violencia y otros problemas sociales, valorando la interculturalidad y el patrimonio.</i></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- V) MÉTODOS DIDÁCTICOS -->
+        <div id="tab5" class="tab-content">
+            <h2 class="section-title"><i>V) Métodos Didácticos (Contenido Fijo Institucional)</i></h2>
+            <p><i>Aplicación del modelo activo-colaborativo y el método del Período Doble (70 minutos):</i></p>
+            
+            <div class="grid-container">
+                <div class="card">
+                    <h3 class="subsection-title"><i>1. Introducción Motivante</i></h3>
+                    <p><i>Activación de presaberes del alumno mediante dinamizaciones, cantos, discusiones, adivinanzas, juegos y lluvia de ideas para diagnóstico docente.</i></p>
+                </div>
+                <div class="card">
+                    <h3 class="subsection-title"><i>2. Trabajo Individual</i></h3>
+                    <p><i>Desarrollo de potencialidades, habilidades y destrezas individuales utilizando técnicas como el trifolio, el proyecto, carteles y estudio dirigido.</i></p>
+                </div>
+                <div class="card">
+                    <h3 class="subsection-title"><i>3. Trabajo en Equipo</i></h3>
+                    <p><i>Interacción con roles definidos bajo la consigna "todos para uno y uno para todos", unificando destrezas individuales para una verdadera interacción cooperativa.</i></p>
+                </div>
+                <div class="card">
+                    <h3 class="subsection-title"><i>4. Plenaria</i></h3>
+                    <p><i>Exposición pública, diálogo socrático, expresión de opiniones y lectura previa en casa en forma rotativa para experimentar el rol de expositor.</i></p>
+                </div>
+            </div>
+
+            <div class="card card-highlight">
+                <h3 class="subsection-title"><i>Metodologías Clave y Evaluación</i></h3>
+                <p><i>Enfoque Constructivista donde el alumno construye su propio aprendizaje significativo. Aprendizaje Basado en Proyectos (ABP), mapas conceptuales, análisis de fuentes, debates, proyectos socioemocionales ("Explora tus emociones"), evaluaciones bimestrales, pruebas escritas/prácticas y autoevaluación.</i></p>
+            </div>
+        </div>
+
+        <!-- VI) BIBLIOGRAFÍA -->
+        <div id="tab6" class="tab-content">
+            <h2 class="section-title"><i>VI) Bibliografía</i></h2>
+            <div class="card">
+                <ul>
+                    <li><i>Libro de Ciencias Sociales 6.º Primaria. Editorial Susaeta.</i></li>
+                    <li><i>Currículum Nacional Base (CNB) de Guatemala, Nivel Primario.</i></li>
+                    <li><i>Dosificación Anual de Ciencias Sociales - Colegio Montano (2027).</i></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VII) CONTENIDOS -->
+        <div id="tab7" class="tab-content">
+            <h2 class="section-title"><i>VII) Contenidos por Unidad</i></h2>
+            <div class="grid-container">
+                
+                <!-- UNIDAD I -->
+                <div class="unit-box">
+                    <div class="unit-header"><i>UNIDAD I (Misión 1: La humanidad a través del tiempo y el espacio)</i></div>
+                    <p><strong><i>Semana 1:</i></strong> <i>Sociedad organizada, Estado y gobierno en Guatemala, e instituciones democráticas.</i></p>
+                    <p><strong><i>Semana 2:</i></strong> <i>Valoración de la diversidad, la historia y sus ciencias auxiliares, edades históricas y áreas culturales.</i></p>
+                    <p><strong><i>Semana 3:</i></strong> <i>Primeras culturas: Egipto, Mesopotamia y Oriente Medio.</i></p>
+                    <p><strong><i>Semana 4:</i></strong> <i>Fenicios, persas, hebreos, China antigua e India antigua.</i></p>
+                    <p><strong><i>Semana 5:</i></strong> <i>Explora tus emociones, mapas, coordenadas y geografía de Europa.</i></p>
+                    <p><strong><i>Semana 6:</i></strong> <i>Relieve, ríos, clima, vegetación, fauna, población y problemas de Europa.</i></p>
+                    <p><strong><i>Semana 7:</i></strong> <i>Organismos internacionales, participación ciudadana, investigación científica y evaluación bimestral.</i></p>
+                </div>
+
+                <!-- UNIDAD II -->
+                <div class="unit-box">
+                    <div class="unit-header"><i>UNIDAD II (Misión 2: Construyendo sociedades: historia, cultura y derechos)</i></div>
+                    <p><strong><i>Semana 8:</i></strong> <i>Derechos humanos, compromisos internacionales y derechos de la niñez.</i></p>
+                    <p><strong><i>Semana 9:</i></strong> <i>Desarrollo humano y civilizaciones clásicas: Grecia y Roma.</i></p>
+                    <p><strong><i>Semana 10:</i></strong> <i>Imperio romano, Edad Media, el islam y salud emocional.</i></p>
+                    <p><strong><i>Semana 11:</i></strong> <i>Recursos naturales, contaminación de mares, Ártico y geografía de Asia.</i></p>
+                    <p><strong><i>Semana 12:</i></strong> <i>Relieve, ríos, clima, vegetación, fauna y población de Asia.</i></p>
+                    <p><strong><i>Semana 13:</i></strong> <i>Problemas poblacionales asiáticos, organismos internacionales y poblaciones vulnerables.</i></p>
+                    <p><strong><i>Semana 14:</i></strong> <i>Medidas de protección (niñez, adolescencia, mujeres), fotografía en investigación y evaluación bimestral.</i></p>
+                </div>
+
+                <!-- UNIDAD III -->
+                <div class="unit-box">
+                    <div class="unit-header"><i>UNIDAD III (Misión 3: Cambios en el mundo: de la Edad Moderna a la actualidad)</i></div>
+                    <p><strong><i>Semana 15:</i></strong> <i>Cultura tributaria, presupuesto del Estado, Edad Moderna y exploraciones.</i></p>
+                    <p><strong><i>Semana 16:</i></strong> <i>Renacimiento, Reforma y Contrarreforma, Ilustración y Revolución Industrial.</i></p>
+                    <p><strong><i>Semana 17:</i></strong> <i>Revolución Francesa, Edad Contemporánea y crisis europea del siglo XIX.</i></p>
+                    <p><strong><i>Semana 18:</i></strong> <i>Libertad e igualdad, independencias latinoamericanas y climatología.</i></p>
+                    <p><strong><i>Semana 19:</i></strong> <i>Geografía física de África: relieve, ríos, clima, vegetación y fauna.</i></p>
+                    <p><strong><i>Semana 20:</i></strong> <i>Población africana, desarrollo sostenible y bienestar social.</i></p>
+                    <p><strong><i>Semana 21:</i></strong> <i>Preservación del patrimonio mundial y natural de Guatemala y evaluación bimestral.</i></p>
+                </div>
+
+                <!-- UNIDAD IV -->
+                <div class="unit-box">
+                    <div class="unit-header"><i>UNIDAD IV (Misión 4: Un mundo en transformación: de los conflictos a la globalización)</i></div>
+                    <p><strong><i>Semana 22:</i></strong> <i>Era digital, sociedad de la información, globalización y movimientos sociales del siglo XIX.</i></p>
+                    <p><strong><i>Semana 23:</i></strong> <i>Imperios coloniales, Primera Guerra Mundial y período entreguerras.</i></p>
+                    <p><strong><i>Semana 24:</i></strong> <i>Segunda Guerra Mundial, Guerra Fría, descolonización y actualidad del siglo XXI.</i></p>
+                    <p><strong><i>Semana 25:</i></strong> <i>Recursos naturales en la economía mundial, regiones polares y geografía de Oceanía.</i></p>
+                    <p><strong><i>Semana 26:</i></strong> <i>Relieve, ríos, clima, vegetación, fauna y población de Oceanía.</i></p>
+                    <p><strong><i>Semana 27:</i></strong> <i>Interculturalidad, marginación, discriminación, racismo y organismos internacionales.</i></p>
+                    <p><strong><i>Semana 28:</i></strong> <i>Prevención de la violencia, movimientos sociales, producto integrador y evaluación final.</i></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    function toggleFullScreen() {
+        var elem = document.getElementById("dashboard");
+        if (!document.fullscreenElement) {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
